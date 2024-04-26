@@ -14,14 +14,14 @@
 /**
  * Testing steps:
  *  Positive: 
- * 	curl -i -X POST http://localhost:8787/ 
+ * 	curl -i -X POST http://wispy-heart-e661.sstierer23.workers.dev
  * response should be:  
  * HTTP/1.1 200 OK
  * Content-Length: 68
  * Content-Type: application/json;charset=UTF-8
  * {"PASSFAIL":"Congrats!  You accessed this page via the POST Method"}%   
 
- * Negative:curl -i -X GET http://localhost:8787/ 
+ * Negative:curl -i -X GET http://wispy-heart-e661.sstierer23.workers.dev
  * response should be:
  * HTTP/1.1 401 Unauthorized
  * Content-Length: 115
