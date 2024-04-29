@@ -43,7 +43,7 @@ var src_default = {
 		 }
 		 else{
 			var status_code = 401;
-			browser_message = "!Error! You tried accessing this page via the " + request.method + " Method.  Only the POST request method is supported";
+			browser_message = "!ERROR! You tried accessing this page via the " + request.method + " Method.  Only the POST request method is supported";
 		}
 		const output = {
 			PASSFAIL: browser_message,
