@@ -11,39 +11,29 @@
  * Learn more at https://developers.cloudflare.com/workers/
  */
 
-/**
- * Testing steps:
- *  Positive: 
- * 	curl -i -X POST http://wispy-heart-e661.sstierer23.workers.dev
- * response should be:  
- * HTTP/1.1 200 OK
- * Content-Length: 68
- * Content-Type: application/json;charset=UTF-8
- * {"PASSFAIL":"Congrats!  You accessed this page via the POST Method"}%   
 
- * Negative:curl -i -X GET http://wispy-heart-e661.sstierer23.workers.dev
- * response should be:
- * HTTP/1.1 401 Unauthorized
- * Content-Length: 115
- * Content-Type: application/json;charset=UTF-8
- * {"PASSFAIL":"!Error! You tried accessing this page via the GET Method.  Only the POST request method is supported"}%
-*/
 var src_default = {
+	
 	async fetch(request: { method: string; URL: string; }, env: any, ctx: any) {
 		//set the basic variables
 		var browser_message;
 	  	var method = request.method;
 		var status_code = 200; //set status code to a default number
 		var request_url = request.URL;
+	   
+		
+		let randomNumber = getRandomInt(4)
+		let response = getResponse(randomNumber)
 
-		console.log("Logging: " + method + " " + request_url)  //check the incoming Method and URL
-		if(request.method == "POST") {
+
+		//console.log("Logging: " + method + " " + request_url)  //check the incoming Method and URL
+		if(request.method == "GET") {
 			var status_code = 200;
-			browser_message = "Congrats!  You accessed this page via the " + request.method + " Method"
+			browser_message = "Congrats!  You accessed this page via the " + request.method + " Method ====> " + response
 		 }
 		 else{
 			var status_code = 401;
-			browser_message = "!ERROR! You tried accessing this page via the " + request.method + " Method.  Only the POST request method is supported";
+			browser_message = "!ERROR! You tried accessing this page via the " + request.method + " Method.  Only the GET request method is supported";
 		}
 		const output = {
 			PASSFAIL: browser_message,
@@ -56,10 +46,35 @@ var src_default = {
 		});
 	}
   };
-  export {
+
+function getRandomInt(max: number) {
+	return Math.floor(Math.random() * max);
+}
+function getResponse(switchnumber: number){
+	var testResponse
+	//console.log(switchnumber)
+	switch (switchnumber){
+		case 0:
+			testResponse = "Mos Eisley, you will never find a more wretched hive of scum and villainy"
+			break;
+		case 1:
+			testResponse = "Do. Or do not. There is no try."
+			break;
+		case 2:
+			testResponse = "These aren’t the droids you’re looking for"
+			break;
+		case 3:
+			testResponse = "I find your lack of faith disturbing."
+			break;
+	}
+	console.log(testResponse)
+	return testResponse
+
+}
+export {
 	src_default as default
-  };
-  //# sourceMappingURL=index.js.map
+};
+
   
   
   
